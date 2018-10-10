@@ -8,7 +8,7 @@ type
     date:   string
 
 let
-  db = open("blog.db", nil, nil, nil)
+  db = open("blog.db", "", "", "")
 
 db.exec(
   sql("""
