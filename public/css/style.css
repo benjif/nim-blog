@@ -1,0 +1,27 @@
+@media (min-width: 769px) {
+  #content { width: 75%; }
+  #left { width: 55%; float: left; }
+  #right { width: 40%; float: right; }
+}
+@media (max-width: 768px) {
+  #content {
+    width: 95%;
+  }
+}
+body {
+  padding: 0;
+  margin: 0;
+}
+h1 { font-size: 16px; padding-bottom: 5px; padding-top: 5px; }
+ul { margin-top: 0; }
+a { text-decoration: none; color: #527f83; }
+a:hover { transition: color 0.5s ease; color: #425d60; }
+p { line-height: 2; font-size: 14px; }
+#content {
+  font-family: 'Helvetica', Arial;
+  margin: 0 auto;
+  display: block;
+}
+#logo {
+  text-align: center;
+}
