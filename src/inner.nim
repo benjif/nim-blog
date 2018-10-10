@@ -63,6 +63,7 @@ proc blog(post: int): string =
         body(
           top(),
           `div`(id="content",
+            h1(p.title),
             p.post
           )
         )
