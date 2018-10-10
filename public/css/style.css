@@ -17,6 +17,8 @@ ul { margin-top: 0; }
 a { text-decoration: none; color: #527f83; }
 a:hover { transition: color 0.5s ease; color: #425d60; }
 p { line-height: 2; font-size: 14px; }
+pre { padding: 10px; margin-left: 40px; margin-top: 10px; margin-bottom: 10px; border-left: 1px dashed #999; line-height: 1.5; }
+img { margin-top: 10px; margin-bottom: 10px; }
 #content {
   font-family: 'Helvetica', Arial;
   margin: 0 auto;
