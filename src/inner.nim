@@ -22,10 +22,12 @@ proc index(): string =
       top(),
       `div`(id="content",
         `div`(id="left",
-          h1("Contact Me"),
+          h1("About"),
+          p("I'm a hobbyist woodworker, a capricious musician, and an autodidactic lover of mathematics and physics who is commonly working towards computational solutions."),
+          p(a(href="https://github.com/ijneb/nim-blog", "Browse the source code for this website here.")),
+          h1("Contact"),
           ul(li("Discord: benji#4364"), li("XMPP: benji@wusz.org")),
-          h1("About Me"),
-          p("I'm a hobbyist woodworker, a capricious musician, and an autodidactic lover of mathematics and physics who is working towards computational solutions.")
+          p("Connect with me on ", a(href="https://www.linkedin.com/in/benjamin-frady", "Linkedin"), " or browse the projects I decide to put on my ", a(href="https://github.com/ijneb", "GitHub"), ".")
         ),
         `div`(id="right",
           h1("Recent Posts"),
