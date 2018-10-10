@@ -47,3 +47,16 @@ proc recentPosts(): seq[Post] =
         date:   post[3]
       )
     )
+
+proc getPosts(): seq[Post] =
+  let
+    res = db.getAllRows(sql"SELECT * FROM posts ORDER BY id DESC")
+  for post in res:
+    result.add(
+      Post(
+        id:     parseInt(post[0]),
+        title:  post[1],
+        post:   post[2],
+        date:   post[3]
+      )
+    )
