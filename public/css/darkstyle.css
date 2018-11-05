@@ -17,7 +17,7 @@
 pre {
   padding: 10px;
   line-height: 1.5;
-  border-left: 1px dashed #999;
+  border-left: 1px dashed #3c3836;
   margin-top: 10px;
   margin-bottom: 10px;
   white-space: pre-wrap;
@@ -31,13 +31,15 @@ pre {
   text-align: center;
 }
 body {
+  background: #282828;
+  color: #fbf1c7;
   font-family: 'Helvetica', Arial;
   padding: 0;
   margin: 0;
 }
 h1 { padding-bottom: 5px; padding-top: 5px; }
 ul { margin-top: 0; }
-a { text-decoration: none; color: #527f83; }
-a:hover { transition: color 0.5s ease; color: #425d60; }
+a { text-decoration: none; color: #83a598; }
+a:hover { transition: color 0.5s ease; color: #d3869b; }
 p { line-height: 2; }
 img { margin-top: 10px; margin-bottom: 10px; display: block; margin-left: auto; margin-right: auto; max-width: 100%; }

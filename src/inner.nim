@@ -1,7 +1,7 @@
 import htmlgen
 include db
 
-proc header(): string =
+proc header(dark: bool = false): string =
   head(
     title("Codewatch"),
     link(rel="icon", href="/favicon.png"),
@@ -35,6 +35,17 @@ proc index(): string =
           ul(recent),
           a(href="/list", "(Click for full list)")
         )
+      )
+    )
+  )
+
+proc error(msg: string): string =
+  html(
+    header(),
+    body(
+      top(),
+      `div`(id="content",
+        h1(msg)
       )
     )
   )
