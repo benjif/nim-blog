@@ -30,6 +30,14 @@ pre {
 #logo {
   text-align: center;
 }
+.icon {
+  display: inline-block;
+  padding-left: 2px;
+  padding-right: 3px;
+  margin: 0;
+  margin-bottom: 3px;
+  vertical-align: middle;
+}
 body {
   font-family: 'Helvetica', Arial;
   padding: 0;
