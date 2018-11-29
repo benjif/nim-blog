@@ -1,1 +1,1 @@
-nim c -o:run src/main.nim
+nim c -o:run -d:release src/main.nim

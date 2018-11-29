@@ -1,4 +1,4 @@
-import db_sqlite, strutils
+import db_sqlite, strutils, times
 
 type
   Post = object
@@ -44,7 +44,7 @@ proc recentPosts(): seq[Post] =
         id:     parseInt(post[0]),
         title:  post[1],
         post:   post[2],
-        date:   post[3]
+        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy")
       )
     )
 
@@ -57,6 +57,6 @@ proc getPosts(): seq[Post] =
         id:     parseInt(post[0]),
         title:  post[1],
         post:   post[2],
-        date:   post[3]
+        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy")
       )
     )

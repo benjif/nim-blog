@@ -16,7 +16,7 @@ proc top(): string =
 proc index(): string =
   var recent: string
   for p in recentPosts():
-    recent &= li(p.date & ": " & a(href = "/blog/" & $(p.id), p.title))
+    recent &= li(span(class="timestamp", p.date & ":") & " " & a(href = "/blog/" & $(p.id), p.title))
   html(
     header(),
     body(
@@ -24,17 +24,16 @@ proc index(): string =
       `div`(id="content",
         `div`(id="left",
           h1("About Me"),
-          p("I'm a hobbyist woodworker, a capricious musician, and an autodidactic lover of mathematics and physics who is commonly working toward computational solutions."),
+          p("I'm a hobbyist woodworker, a capricious musician, and an advocate for autodidacticism; I frequently develop bits (pun intended) of software."),
           h1("Contact"),
-          ul(
-            li("Email: ", a(href="mailto:benji@codewat.ch", "benji@codewat.ch")),
-            li("Discord: benji#4364"),
-            li("XMPP: benji@wusz.org")
+          p(
+            "If you need to get in contact with me, you can ",
+            a(href="mailto:benji@codewat.ch", "shoot me an email"), "."
           ),
           p(
-            "Connect with me on ",
+            "To follow my projects, connect with me on ",
             a(href="https://www.linkedin.com/in/benjamin-frady", img(src="/icons/linkedin.svg", alt="", width="16px", class="icon"), "Linkedin"),
-            " or browse the works that I put on ",
+            " or browse the projects that I put on ",
             a(href="https://github.com/ijneb", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
           ),
           p(a(href="https://github.com/ijneb/nim-blog", "Browse the source code for this website here."))
@@ -62,7 +61,7 @@ proc error(msg: string): string =
 proc list(): string =
   var posts: string
   for p in getPosts():
-    posts &= li(p.date & ": " & a(href = "/blog/" & $(p.id), p.title))
+    posts &= li(span(class="timestamp", p.date & ":") & " " & a(href = "/blog/" & $(p.id), p.title))
   html(
     header(),
     body(
