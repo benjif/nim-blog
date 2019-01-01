@@ -1,11 +1,11 @@
 @media (min-width: 1024px) {
   #logo { font-size: 20px; }
-  #content { max-width: 840px; min-width: 769px; }
+  #content { max-width: 940px; min-width: 769px; }
   #left { width: 55%; float: left; }
   #right { width: 40%; float: right; }
-  .timestamp { /*font-size: 11px; margin-bottom: 11px;*/ color: #666; margin-right: 0.5em; }
-  p { font-size: 14px; }
-  li { font-size: 14px; }
+  .timestamp { color: #666; margin-right: 0.5em; }
+  p { font-size: 16px; }
+  li { font-size: 16px; }
   h1 { font-size: 16px; }
   pre { margin-left: 25px; }
 }
@@ -35,8 +35,17 @@
   margin-bottom: 3px;
   vertical-align: middle;
 }
+@font-face {
+  font-family: 'Inter UI';
+  font-style: normal;
+  font-weight: 400;
+  src: url('fonts/Inter-UI-Regular.woff2') format('woff2'),
+       url('fonts/Inter-UI-Regular.woff') format('woff'),
+       url('fonts/Inter-UI-Regular.ttf') format('truetype');
+}
 body {
-  font-family: 'Helvetica', Arial;
+  font-family: 'Inter UI', 'Helvetica', Arial;
+  /*font-family: 'Helvetica', Arial;*/
   padding: 0;
   margin: 0;
 }
@@ -51,7 +60,7 @@ pre {
   padding: 10px;
   padding-left: 30px;
   line-height: 1.5;
-  border-left: 1px dashed #999;
+  font-size: 14px;
   margin: 0 auto;
   margin-top: 10px;
   margin-bottom: 10px;
@@ -60,8 +69,8 @@ pre {
   display: inline-block;
 }
 img {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   display: block;
   margin-left: auto;
   margin-right: auto;

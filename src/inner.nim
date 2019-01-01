@@ -16,7 +16,7 @@ proc top(): string =
 proc index(): string =
   var recent: string
   for p in recentPosts():
-    recent &= li(span(class="timestamp", p.date & ":") & " " & a(href = "/blog/" & $(p.id), p.title))
+    recent &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   html(
     header(),
     body(
@@ -61,7 +61,7 @@ proc error(msg: string): string =
 proc list(): string =
   var posts: string
   for p in getPosts():
-    posts &= li(span(class="timestamp", p.date & ":") & " " & a(href = "/blog/" & $(p.id), p.title))
+    posts &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   html(
     header(),
     body(
