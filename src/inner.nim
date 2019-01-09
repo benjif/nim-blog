@@ -24,7 +24,7 @@ proc index(): string =
       `div`(id="content",
         `div`(id="left",
           h1("About Me"),
-          p("I'm a hobbyist woodworker, a capricious musician, and an advocate for autodidacticism; I frequently develop bits (pun intended) of software."),
+          p("I'm a hobbyist woodworker, a capricious musician, and an advocate for autodidacticism. I frequently develop bits (pun intended) of software."),
           h1("Contact"),
           p(
             "If you need to get in contact with me, you can ",
@@ -41,7 +41,7 @@ proc index(): string =
         `div`(id="right",
           h1("Recent Posts"),
           ul(recent),
-          a(href="/list", "(Click for full list)")
+          a(href="/list", "Click for full list")
         )
       )
     )

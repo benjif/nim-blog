@@ -36,7 +36,7 @@
   vertical-align: middle;
 }
 @font-face {
-  font-family: 'Inter UI';
+  font-family: 'Inter UI', sans-serif;
   font-style: normal;
   font-weight: 400;
   src: url('fonts/Inter-UI-Regular.woff2') format('woff2'),
@@ -45,13 +45,12 @@
 }
 body {
   font-family: 'Inter UI', 'Helvetica', Arial;
-  /*font-family: 'Helvetica', Arial;*/
   padding: 0;
   margin: 0;
 }
 h1 { padding-bottom: 5px; padding-top: 5px; }
-ul { margin-top: 0; list-style-type: none; padding-left: 20px; }
-li { padding-bottom: 10px; }
+ul { list-style-type: none; padding-left: 20px; }
+li { line-height: 2; }
 ul li:before { position: absolute; margin-left: -1em; }
 a { text-decoration: none; color: #527f83; }
 a:hover { transition: color 0.5s ease; color: #425d60; }
