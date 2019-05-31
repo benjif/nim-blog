@@ -35,6 +35,9 @@ proc findPost(id: int): Post =
   else:
     result = Post()
 
+proc updatePost(id: int, content: string): void =
+  db.exec(sql"UPDATE posts SET post=? WHERE id=?", content, id)
+
 proc recentPosts(): seq[Post] =
   let
     res = db.getAllRows(sql"SELECT * FROM posts ORDER BY id DESC LIMIT 3")

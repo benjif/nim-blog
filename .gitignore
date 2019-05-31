@@ -3,4 +3,6 @@ run
 nimcache
 add
 edit
+out
 public/images
+posts

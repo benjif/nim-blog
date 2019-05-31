@@ -16,7 +16,7 @@
   }
   .timestamp { font-size: 0.8em; margin-right: 0.2em; }
   body {
-    font-size: 0.8em;
+    font-size: 1.0em;
   }
   h1 { font-size: 1.5em; }
 }
@@ -53,7 +53,7 @@ ul { list-style-type: none; padding-left: 20px; }
 li { line-height: 2; }
 ul li:before { position: absolute; margin-left: -1em; }
 a { text-decoration: none; color: #527f83; }
-a:hover { transition: color 0.5s ease; color: #425d60; }
+a:hover { color: #425d60; }
 p { line-height: 2; }
 pre {
   padding: 10px;

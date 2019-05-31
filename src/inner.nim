@@ -1,5 +1,16 @@
-import htmlgen
+import htmlgen, markdown, strutils, os
 include db
+
+proc updatePosts(): void =
+  for f in walkFiles("posts/*.md"):
+    let
+      md = readFile(f)
+      html = markdown(md)
+      id = parseInt(f[6..^4])
+      old = findPost(id)
+    if old.post != html:
+      echo "* Updating post #", id
+      updatePost(id, html)
 
 proc header(dark: bool = false): string =
   head(
@@ -10,7 +21,7 @@ proc header(dark: bool = false): string =
 
 proc top(): string =
   `div`(id="logo",
-    h1(a(href="/", "Codewatch"))
+    h1(a(href="/", "Benji's Website"))
   )
 
 proc index(): string =
@@ -24,7 +35,7 @@ proc index(): string =
       `div`(id="content",
         `div`(id="left",
           h1("About Me"),
-          p("I'm a hobbyist woodworker, a capricious musician, and an advocate for autodidacticism. I frequently develop bits (pun intended) of software."),
+          p("Hi, I'm Benjamin. I enjoy woodworking, fiddling with music, and designing software."),
           h1("Contact"),
           p(
             "If you need to get in contact with me, you can ",

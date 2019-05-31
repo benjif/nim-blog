@@ -1,6 +1,8 @@
 import jester, re, strutils
 include inner
 
+updatePosts()
+
 routes:
   get "/":
     resp index()
