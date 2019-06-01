@@ -30,17 +30,14 @@ proc findPost(id: int): Post =
         id:     parseInt(res[0][0]),
         title:  res[0][1],
         post:   res[0][2],
-        date:   res[0][3]
+        date:   format(parse(res[0][3], "yyyy-MM-dd"), "dd MMM yyyy")
       )
   else:
-    result = Post()
+    result = Post(id: -1)
 
-proc updatePost(id: int, content: string): void =
-  db.exec(sql"UPDATE posts SET post=? WHERE id=?", content, id)
-
-proc recentPosts(): seq[Post] =
+proc getPosts(): seq[Post] =
   let
-    res = db.getAllRows(sql"SELECT * FROM posts ORDER BY id DESC LIMIT 3")
+    res = db.getAllRows(sql"SELECT * FROM posts ORDER BY id DESC")
   for post in res:
     result.add(
       Post(
@@ -51,9 +48,25 @@ proc recentPosts(): seq[Post] =
       )
     )
 
-proc getPosts(): seq[Post] =
+proc addPost(p: Post): int =
+  let postCount = getPosts().len
+  if p.id == postCount+1:
+    db.exec(
+      sql"INSERT INTO posts (title, post, date) VALUES (?,?,?)",
+      p.title,
+      p.post,
+      p.date
+    )
+  else:
+    return -1
+  return 0
+
+proc updatePost(id: int, content: string): void =
+  db.exec(sql"UPDATE posts SET post=? WHERE id=?", content, id)
+
+proc recentPosts(): seq[Post] =
   let
-    res = db.getAllRows(sql"SELECT * FROM posts ORDER BY id DESC")
+    res = db.getAllRows(sql"SELECT * FROM posts ORDER BY id DESC LIMIT 3")
   for post in res:
     result.add(
       Post(

@@ -12,6 +12,6 @@ routes:
   get "/list":
     resp list()
   error Http404:
-    resp Http404, error("Not found")
+    resp Http404, error("Page not found")
 
 db.close()
