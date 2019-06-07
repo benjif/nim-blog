@@ -1,0 +1,13 @@
+--2019-06-03 03:22:19--  https://0x0.st/zMYO.woff2
+Resolving 0x0.st (0x0.st)... 136.243.89.164, 2a01:4f8:171:1a2::3
+Connecting to 0x0.st (0x0.st)|136.243.89.164|:443... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 124560 (122K) [application/octet-stream]
+Saving to: 'zMYO.woff2.1'
+
+     0K .......... .......... .......... .......... .......... 41%  612K 0s
+    50K .......... .......... .......... .......... .......... 82%  628K 0s
+   100K .......... .......... .                               100% 74.2M=0.2s
+
+2019-06-03 03:22:20 (752 KB/s) - 'zMYO.woff2.1' saved [124560/124560]
+
