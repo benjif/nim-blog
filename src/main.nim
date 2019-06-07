@@ -13,5 +13,7 @@ routes:
     resp list()
   error Http404:
     resp Http404, error("Page not found")
+  error Exception:
+    resp Http500, error("Something went wrong")
 
 db.close()
