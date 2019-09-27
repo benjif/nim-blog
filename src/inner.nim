@@ -29,17 +29,16 @@ proc updatePosts(): void =
 
 proc header(dark: bool = false): string =
   head(
-    title("Codewatch"),
+    title("Benjamin Frady"),
     meta(name="viewport", content="width=device-width,height=device-height,initial-scale=1.0"),
     link(rel="icon", href="/favicon.png"),
     link(rel="stylesheet", type="text/css", href="/css/style.css")
   )
 
 proc top(): string =
-  a(href="/",
-    `div`(id="logo",
-      img(src="/images/soyuz.png", alt="", width="120px"),
-      span(id="logo-text", "Codewatch")
+  `div`(id="logo",
+    a(href="/",
+      img(src="/images/frady.png", alt="", height="72")
     )
   )
 
@@ -57,10 +56,8 @@ proc index(): string =
         h1("Contact"),
         p(
           "If you'd like to get in contact with me, you can ",
-          a(href="mailto:benji@codewat.ch", "shoot me an email"), ". You can find me on ",
-          a(href="https://www.linkedin.com/in/benjamin-frady", img(src="/icons/linkedin.svg", alt="", width="16px", class="icon"), "Linkedin"),
-          " and ",
-          a(href="https://github.com/ijneb", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
+          a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow me on ",
+          a(href="https://github.com/benjif", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
         ),
         h1("Recent Posts"),
         ul(recent),
