@@ -1,3 +1,3 @@
 # Blog Written in Nim
 
-Take a look at [my website](https://codewat.ch/) to see it in action.
+Take a look at [my website](https://frady.org/) to see it in action.
