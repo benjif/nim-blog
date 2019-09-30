@@ -56,7 +56,7 @@ proc index(): string =
         h1("Contact"),
         p(
           "If you'd like to get in contact with me, you can ",
-          a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow me on ",
+          a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow my public projects on ",
           a(href="https://github.com/benjif", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
         ),
         h1("Recent Posts"),

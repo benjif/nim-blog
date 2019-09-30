@@ -2,16 +2,49 @@
   font-family: 'Inter UI', sans-serif;
   font-style: normal;
   font-weight: normal;
-  src: url('fonts/Inter-UI-Regular.woff2') format('woff2'),
-       url('fonts/Inter-UI-Regular.woff') format('woff'),
-       url('fonts/Inter-UI-Regular.ttf') format('truetype');
+  src: url('/fonts/inter-ui/Inter-UI-Regular.woff2') format('woff2'),
+       url('/fonts/inter-ui//Inter-UI-Regular.woff') format('woff'),
+       url('/fonts/inter-ui/Inter-UI-Regular.ttf') format('truetype');
 }
-#content {
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  max-width: 44rem;
-  margin: 0 auto;
-  display: block;
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-Regular.ttf.woff2') format('woff2'),
+         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Regular.otf.woff') format('woff'),
+         url('/fonts/source-serif-pro/OTF/SourceSerifPro-Regular.otf') format('opentype'),
+         url('/fonts/source-serif-pro/TTF/SourceSerifPro-Regular.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 400;
+    font-style: italic;
+    font-stretch: normal;
+    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-RegularIt.ttf.woff2') format('woff2'),
+         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-RegularIt.otf.woff') format('woff'),
+         url('/fonts/source-serif-pro/OTF/SourceSerifPro-RegularIt.otf') format('opentype'),
+         url('/fonts/source-serif-pro/TTF/SourceSerifPro-RegularIt.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 700;
+    font-style: normal;
+    font-stretch: normal;
+    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-Bold.ttf.woff2') format('woff2'),
+         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Bold.otf.woff') format('woff'),
+         url('/fonts/source-serif-pro/OTF/SourceSerifPro-Bold.otf') format('opentype'),
+         url('/fonts/source-serif-pro/TTF/SourceSerifPro-Bold.ttf') format('truetype');
+}
+@font-face{
+    font-family: 'Source Serif Pro';
+    font-weight: 700;
+    font-style: italic;
+    font-stretch: normal;
+    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-BoldIt.ttf.woff2') format('woff2'),
+         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-BoldIt.otf.woff') format('woff'),
+         url('/fonts/source-serif-pro/OTF/SourceSerifPro-BoldIt.otf') format('opentype'),
+         url('/fonts/source-serif-pro/TTF/SourceSerifPro-BoldIt.ttf') format('truetype');
 }
 #logo {
   width: 136px;
@@ -53,20 +86,30 @@ ul li .timestamp {
 }
 h1 {
   font-weight: bold;
-  font-size: 18px;
+  font-size: 16px;
   padding-top: 8px;
 }
 body {
-  font-family: 'Inter UI', 'Helvetica', Arial;
+  /*font-family: 'Inter UI', 'Helvetica', Arial;*/
+  font-family: 'Source Serif Pro', 'Helvetica', Arial;
   padding: 0;
   margin: 0;
 }
+#content {
+  text-align: justify;
+  hyphens: auto;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  max-width: 46rem;
+  margin: 0 auto;
+  display: block;
+}
 ul { list-style-type: none; padding-left: 20px; }
-li { line-height: 2; font-size: 16px; }
+li { line-height: 1.7; font-size: 16px; }
 ul li:before { position: absolute; margin-left: -1em; }
 a { text-decoration: none; color: #527f83; }
 a:hover { color: #425d60; }
-p { line-height: 2; font-size: 16px; }
+p { line-height: 1.7; font-size: 16px; }
 code {
   font-size: 14px;
   padding: 16px;
