@@ -36,32 +36,45 @@ proc header(dark: bool = false): string =
   )
 
 proc top(): string =
-  `div`(id="logo",
+  `div`(id="left",
     a(href="/",
-      img(src="/images/frady.png", alt="", height="72")
+      img(src="/images/frady.png", alt="", height="84")
+    ),
+    hr(),
+    `div`(id="nav",
+      ul(
+        li(a(href="/list", "All posts")),
+        li(a(href="https://github.com/benjif", "GitHub"))
+      )
     )
   )
 
 proc index(): string =
-  var recent: string
-  for p in recentPosts():
-    recent &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
+  var
+    recentList: seq[Post] = recentPosts()
+    recentString: string
+  if len(recentList) == 0:
+    recentString = li("Nothing here yet!")
+  else:
+    for p in recentList:
+      recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   html(
     header(),
     body(
       `div`(id="content",
         top(),
-        h1("About Me"),
-        p("Hi, I'm Benjamin. I enjoy woodworking, fiddling with music, and designing software."),
-        h1("Contact"),
-        p(
-          "If you'd like to get in contact with me, you can ",
-          a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow my public projects on ",
-          a(href="https://github.com/benjif", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
-        ),
-        h1("Recent Posts"),
-        ul(recent),
-        a(href="/list", "Click for full list")
+        `div`(id="right",
+          h1("About Me"),
+          p("Hi, I'm Benjamin Frady. I enjoy woodworking, fiddling with music, and designing software."),
+          h1("Contact"),
+          p(
+            "If you'd like to get in contact with me, you can ",
+            a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow my public projects on ",
+            a(href="https://github.com/benjif", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
+          ),
+          h1("Recent Posts"),
+          ul(recentString),
+        )
       )
     )
   )
@@ -72,22 +85,29 @@ proc error(msg: string): string =
     body(
       `div`(id="content",
         top(),
-        h1(msg)
+        `div`(id="right", h1(msg))
       )
     )
   )
 
 proc list(): string =
-  var posts: string
-  for p in getPosts():
-    posts &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
+  var
+    recentList: seq[Post] = recentPosts()
+    recentString: string
+  if len(recentList) == 0:
+    recentString = li("Nothing here yet!")
+  else:
+    for p in recentList:
+      recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   html(
     header(),
     body(
       `div`(id="content",
         top(),
-        h1("All Posts"),
-        ul(posts)
+        `div`(id="right",
+          h1("All Posts"),
+          ul(recentString)
+        )
       )
     )
   )
@@ -102,9 +122,11 @@ proc blog(post: int): string =
         body(
           `div`(id="content",
             top(),
-            h1(class="post-title", p.title),
-            span(class="date", p.date),
-            p.post
+            `div`(id="right",
+              h1(class="post-title", p.title),
+              span(class="date", p.date),
+              p.post
+            )
           )
         )
       )

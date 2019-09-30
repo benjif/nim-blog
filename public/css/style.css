@@ -1,64 +1,59 @@
-@font-face {
-  font-family: 'Inter UI', sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  src: url('/fonts/inter-ui/Inter-UI-Regular.woff2') format('woff2'),
-       url('/fonts/inter-ui//Inter-UI-Regular.woff') format('woff'),
-       url('/fonts/inter-ui/Inter-UI-Regular.ttf') format('truetype');
+@media (max-width: 960px) {
+  #left {
+    display: block;
+    margin: 0 auto;
+  }
 }
-@font-face{
-    font-family: 'Source Serif Pro';
-    font-weight: 400;
-    font-style: normal;
-    font-stretch: normal;
-    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-Regular.ttf.woff2') format('woff2'),
-         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Regular.otf.woff') format('woff'),
-         url('/fonts/source-serif-pro/OTF/SourceSerifPro-Regular.otf') format('opentype'),
-         url('/fonts/source-serif-pro/TTF/SourceSerifPro-Regular.ttf') format('truetype');
+@media (min-width: 980px) {
+  #left {
+    position: absolute;
+  }
+  #right {
+    margin-left: 82px;
+    padding-left: 12px;
+  }
+  .icon {
+    padding-top: 2px;
+  }
 }
-@font-face{
-    font-family: 'Source Serif Pro';
-    font-weight: 400;
-    font-style: italic;
-    font-stretch: normal;
-    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-RegularIt.ttf.woff2') format('woff2'),
-         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-RegularIt.otf.woff') format('woff'),
-         url('/fonts/source-serif-pro/OTF/SourceSerifPro-RegularIt.otf') format('opentype'),
-         url('/fonts/source-serif-pro/TTF/SourceSerifPro-RegularIt.ttf') format('truetype');
+#left {
+  width: 82px;
 }
-@font-face{
-    font-family: 'Source Serif Pro';
-    font-weight: 700;
-    font-style: normal;
-    font-stretch: normal;
-    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-Bold.ttf.woff2') format('woff2'),
-         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Bold.otf.woff') format('woff'),
-         url('/fonts/source-serif-pro/OTF/SourceSerifPro-Bold.otf') format('opentype'),
-         url('/fonts/source-serif-pro/TTF/SourceSerifPro-Bold.ttf') format('truetype');
-}
-@font-face{
-    font-family: 'Source Serif Pro';
-    font-weight: 700;
-    font-style: italic;
-    font-stretch: normal;
-    src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-BoldIt.ttf.woff2') format('woff2'),
-         url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-BoldIt.otf.woff') format('woff'),
-         url('/fonts/source-serif-pro/OTF/SourceSerifPro-BoldIt.otf') format('opentype'),
-         url('/fonts/source-serif-pro/TTF/SourceSerifPro-BoldIt.ttf') format('truetype');
-}
-#logo {
-  width: 136px;
-  display: block;
-  margin: 0 auto;
-  margin-bottom: 0;
-  margin-top: 0;
-}
-#logo img {
+#left img {
   padding: 0;
   margin: 0;
 }
-#logo a {
+#left a {
   display: inline-block;
+}
+#left hr {
+  display: block;
+  margin-top: 12px auto;
+  height: 0px;
+  width: 82px;
+  overflow: visible;
+  padding: 0;
+  border: none;
+  border-top: medium double #333;
+  color: #333;
+  text-align: center;
+}
+#left hr:after {
+  content: "~";
+  display: inline-block;
+  position: relative;
+  top: -0.8em;
+  font-size: 1em;
+  padding: 0 0.25em;
+  background: white;
+}
+#nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#nav li {
+  text-align: center;
 }
 .post-title {
   margin-bottom: 0;
@@ -87,10 +82,10 @@ ul li .timestamp {
 h1 {
   font-weight: bold;
   font-size: 16px;
-  padding-top: 8px;
+  margin-top: 8px;
+  margin-bottom: 8px;
 }
 body {
-  /*font-family: 'Inter UI', 'Helvetica', Arial;*/
   font-family: 'Source Serif Pro', 'Helvetica', Arial;
   padding: 0;
   margin: 0;
@@ -98,18 +93,18 @@ body {
 #content {
   text-align: justify;
   hyphens: auto;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem;
-  max-width: 46rem;
+  max-width: 50rem;
   margin: 0 auto;
+  padding-left: 10px;
+  padding-right: 10px;
   display: block;
 }
-ul { list-style-type: none; padding-left: 20px; }
-li { line-height: 1.7; font-size: 16px; }
+ul { list-style-type: decimal; padding-left: 20px; margin-top: 0; }
+li { line-height: 1.7; }
 ul li:before { position: absolute; margin-left: -1em; }
 a { text-decoration: none; color: #527f83; }
 a:hover { color: #425d60; }
-p { line-height: 1.7; font-size: 16px; }
+p { line-height: 1.7; font-size: 16px; margin-top: 8px; margin-bottom: 8px; }
 code {
   font-size: 14px;
   padding: 16px;
@@ -131,4 +126,52 @@ img {
   margin-left: auto;
   margin-right: auto;
   max-width: 100%;
+}
+@font-face {
+  font-family: 'Inter UI', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  src: url('/fonts/inter-ui/Inter-UI-Regular.woff2') format('woff2'),
+       url('/fonts/inter-ui//Inter-UI-Regular.woff') format('woff'),
+       url('/fonts/inter-ui/Inter-UI-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Source Serif Pro';
+  font-weight: 400;
+  font-style: normal;
+  font-stretch: normal;
+  src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-Regular.ttf.woff2') format('woff2'),
+       url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Regular.otf.woff') format('woff'),
+       url('/fonts/source-serif-pro/OTF/SourceSerifPro-Regular.otf') format('opentype'),
+       url('/fonts/source-serif-pro/TTF/SourceSerifPro-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Source Serif Pro';
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+  src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-RegularIt.ttf.woff2') format('woff2'),
+       url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-RegularIt.otf.woff') format('woff'),
+       url('/fonts/source-serif-pro/OTF/SourceSerifPro-RegularIt.otf') format('opentype'),
+       url('/fonts/source-serif-pro/TTF/SourceSerifPro-RegularIt.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Source Serif Pro';
+  font-weight: 700;
+  font-style: normal;
+  font-stretch: normal;
+  src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-Bold.ttf.woff2') format('woff2'),
+       url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Bold.otf.woff') format('woff'),
+       url('/fonts/source-serif-pro/OTF/SourceSerifPro-Bold.otf') format('opentype'),
+       url('/fonts/source-serif-pro/TTF/SourceSerifPro-Bold.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Source Serif Pro';
+  font-weight: 700;
+  font-style: italic;
+  font-stretch: normal;
+  src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-BoldIt.ttf.woff2') format('woff2'),
+       url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-BoldIt.otf.woff') format('woff'),
+       url('/fonts/source-serif-pro/OTF/SourceSerifPro-BoldIt.otf') format('opentype'),
+       url('/fonts/source-serif-pro/TTF/SourceSerifPro-BoldIt.ttf') format('truetype');
 }
