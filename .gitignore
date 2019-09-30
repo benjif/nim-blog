@@ -8,4 +8,5 @@ add
 edit
 out
 del
-public/images
+public/images/*
+!public/images/frady.png
