@@ -4,9 +4,6 @@
 blog.db
 run
 nimcache
-add
-edit
-out
-del
+tools
 public/images/*
 !public/images/frady.png
