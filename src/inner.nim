@@ -9,7 +9,7 @@ proc updatePosts(): void =
       id = parseInt(f[6..^4])
       old = findPost(id)
     if old.id == -1:
-      echo "PRE Attepting adding new post #", id
+      echo "PRE Attempting adding new post #", id
       echo "New post title: "
       let title = readLine(stdin)
       let res = addPost(
@@ -43,8 +43,8 @@ proc top(): string =
     hr(),
     `div`(id="nav",
       ul(
-        li(a(href="/list", "All posts")),
-        li(a(href="https://github.com/benjif", "GitHub"))
+        li(a(href="/list", "All Posts")),
+        li(a(href="/links", "Find Me"))
       )
     )
   )
@@ -70,7 +70,7 @@ proc index(): string =
           p(
             "If you'd like to get in contact with me, you can ",
             a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow my public projects on ",
-            a(href="https://github.com/benjif", img(src="/icons/github.svg", alt="", width="16px", class="icon"), "GitHub"), "."
+            a(href="https://github.com/benjif", img(src="/icons/github.svg", style="padding-right: 3px;", alt="", width="16px", class="icon"), "GitHub"), "."
           ),
           h1("Recent Posts"),
           ul(recentString),
@@ -123,11 +123,52 @@ proc blog(post: int): string =
           `div`(id="content",
             top(),
             `div`(id="right",
-              h1(class="post-title", p.title),
-              span(class="date", p.date),
-              p.post
+              `div`(id="post",
+                h1(class="post-title", p.title),
+                span(class="date", p.date),
+                p.post
+              )
             )
           )
         )
       )
   else: result = error("Page not found")
+
+proc links(): string =
+  html(
+    header(),
+    body(
+      `div`(id="content",
+        top(),
+        `div`(id="right",
+          h1("Personal Links"),
+          ul(
+            li(
+              a(href="https://github.com/benjif",
+                img(src="/icons/github.svg", alt="", width="16px", class="icon"),
+                "GitHub"
+              )
+            ),
+            li(
+              a(href="https://last.fm/user/benji_is_me",
+                img(src="/icons/last-dot-fm.svg", alt="", width="16px", class="icon"),
+                "Last.fm"
+              )
+            ),
+            li(
+              a(href="https://linkedin.com/in/benjamin-frady",
+                img(src="/icons/linkedin.svg", alt="", width="16px", class="icon"),
+                "LinkedIn"
+              )
+            ),
+            li(
+              a(href="https://news.ycombinator.com/user?id=benji_is_me",
+                img(src="/icons/ycombinator.svg", alt="", width="16px", class="icon"),
+                "HackerNews"
+              )
+            )
+          )
+        )
+      )
+    )
+  )

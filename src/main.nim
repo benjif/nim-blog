@@ -11,6 +11,8 @@ routes:
       resp blog(parseInt(request.matches[0]))
   get "/list":
     resp list()
+  get "/links":
+    resp links()
   error Http404:
     resp Http404, error("Page not found")
   error Exception:
