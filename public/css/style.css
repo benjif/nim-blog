@@ -10,7 +10,7 @@
   }
   #right {
     margin-left: 82px;
-    padding-left: 12px;
+    padding-left: 14px;
   }
   .icon {
     padding-top: 2px;
@@ -29,12 +29,13 @@
   max-width: 100%;
 }
 #post .figure .caption {
-  font-family: "Inter UI", Helvetica;
+  font-family: 'Inter UI', Helvetica;
   font-size: 14px;
   text-align: center;
   margin-top: 0.5rem;
 }
 #left {
+  font-family: 'Source Serif Pro';
   width: 82px;
 }
 #left img {
@@ -75,6 +76,7 @@
   font-variant: small-caps;
 }
 .post-title {
+  font-size: 20px;
   margin-bottom: 0;
 }
 .timestamp {
@@ -87,7 +89,7 @@ ul li .timestamp {
   width: 7em;
 }
 ul li .timestamp:before {
-  content: "\25C7"; 
+  content: "\00BB"; 
   padding-right: 5px;
 }
 .date {
@@ -104,12 +106,15 @@ ul li .timestamp:before {
   vertical-align: middle;
 }
 h1 {
+  color: #3c3c3c;
+  font-variant: small-caps;
   font-weight: bold;
   font-size: 16px;
   margin-top: 8px;
   margin-bottom: 8px;
 }
 body {
+  /*font-family: 'Inter UI', Helvetica, Arial;*/
   font-family: 'Source Serif Pro', 'Helvetica', Arial;
   padding: 0;
   margin: 0;
@@ -128,7 +133,7 @@ li { line-height: 1.7; }
 ul li:before { position: absolute; margin-left: -1em; }
 a { text-decoration: none; color: #527f83; }
 a:hover { color: #425d60; }
-p { line-height: 1.7; font-size: 16px; margin-top: 8px; margin-bottom: 8px; }
+p { line-height: 1.7; font-size: 16px; margin-top: 8px; margin-bottom: 8px; padding-bottom: 8px; }
 code {
   font-size: 14px;
   padding: 16px;
@@ -143,7 +148,6 @@ code {
   word-break: keep-all;
   display: block;
 }
-
 @font-face {
   font-family: 'Inter UI', sans-serif;
   font-style: normal;
@@ -161,6 +165,16 @@ code {
        url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-Regular.otf.woff') format('woff'),
        url('/fonts/source-serif-pro/OTF/SourceSerifPro-Regular.otf') format('opentype'),
        url('/fonts/source-serif-pro/TTF/SourceSerifPro-Regular.ttf') format('truetype');
+}
+@font-face{
+  font-family: 'Source Serif Pro';
+  font-weight: 400;
+  font-style: italic;
+  font-stretch: normal;
+  src: url('/fonts/source-serif-pro/WOFF2/TTF/SourceSerifPro-It.ttf.woff2') format('woff2'),
+       url('/fonts/source-serif-pro/WOFF/OTF/SourceSerifPro-It.otf.woff') format('woff'),
+       url('/fonts/source-serif-pro/OTF/SourceSerifPro-It.otf') format('opentype'),
+       url('/fonts/source-serif-pro/TTF/SourceSerifPro-It.ttf') format('truetype');
 }
 @font-face{
   font-family: 'Source Serif Pro';
