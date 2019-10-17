@@ -1,4 +1,4 @@
-import db_sqlite, strutils, times
+import db_sqlite, strutils, times, md5
 
 type
   Post = object
@@ -6,6 +6,7 @@ type
     title:  string
     post:   string
     date:   string
+    chksm: string
 
 let
   db = open("blog.db", "", "", "")
@@ -13,10 +14,11 @@ let
 db.exec(
   sql("""
   CREATE TABLE IF NOT EXISTS posts (
-    id    INTEGER PRIMARY KEY,
-    title VARCHAR(50) NOT NULL,
-    post  TEXT NOT NULL,
-    date  VARCHAR(8) NOT NULL
+    id      INTEGER PRIMARY KEY,
+    title   VARCHAR(50) NOT NULL,
+    post    TEXT NOT NULL,
+    chksm  CHARACTER(16) NOT NULL,
+    date    VARCHAR(8) NOT NULL
   )
   """)
 )
@@ -30,7 +32,8 @@ proc findPost(id: int): Post =
         id:     parseInt(res[0][0]),
         title:  res[0][1],
         post:   res[0][2],
-        date:   format(parse(res[0][3], "yyyy-MM-dd"), "dd MMM yyyy")
+        date:   format(parse(res[0][3], "yyyy-MM-dd"), "dd MMM yyyy"),
+        chksm: res[0][4]
       )
   else:
     result = Post(id: -1)
@@ -44,7 +47,8 @@ proc getPosts(): seq[Post] =
         id:     parseInt(post[0]),
         title:  post[1],
         post:   post[2],
-        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy")
+        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy"),
+        chksm:  post[4]
       )
     )
 
@@ -52,17 +56,18 @@ proc addPost(p: Post): int =
   let postCount = getPosts().len
   if p.id == postCount+1:
     db.exec(
-      sql"INSERT INTO posts (title, post, date) VALUES (?,?,?)",
+      sql"INSERT INTO posts (title, post, date, chksm) VALUES (?,?,?,?)",
       p.title,
       p.post,
-      p.date
+      p.date,
+      getMD5(p.post)
     )
   else:
     return -1
   return 0
 
 proc updatePost(id: int, content: string): void =
-  db.exec(sql"UPDATE posts SET post=? WHERE id=?", content, id)
+  db.exec(sql"UPDATE posts SET post=?, chksm=? WHERE id=?", content, getMD5(content), id)
 
 proc recentPosts(): seq[Post] =
   let
@@ -73,6 +78,7 @@ proc recentPosts(): seq[Post] =
         id:     parseInt(post[0]),
         title:  post[1],
         post:   post[2],
-        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy")
+        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy"),
+        chksm: post[4]
       )
     )

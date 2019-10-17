@@ -6,6 +6,7 @@ proc updatePosts(): void =
     let
       md = readFile(f)
       html = markdown(md)
+      new_chksm = getMD5(html)
       id = parseInt(f[6..^4])
       old = findPost(id)
     if old.id == -1:
@@ -23,7 +24,7 @@ proc updatePosts(): void =
       if res == -1:
         echo "Failed to add new post #", id
         quit()
-    elif old.post != html:
+    elif old.chksm != new_chksm:
       echo "PRE Updating post #", id
       updatePost(id, html)
 
@@ -69,7 +70,7 @@ proc index(): string =
           h1("Contact"),
           p(
             "If you'd like to get in contact with me, you can ",
-            a(href="mailto:benjamin@frady.org", "shoot me an email"), ". You can follow my public projects on ",
+            a(href="mailto:benjamin@frady.org", "shoot me an email"), ". My public projects can be found on ",
             a(href="https://github.com/benjif", img(src="/icons/github.svg", style="padding-right: 3px;", alt="", width="16px", class="icon"), "GitHub"), "."
           ),
           h1("Recent Posts"),
