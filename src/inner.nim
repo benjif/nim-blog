@@ -1,5 +1,4 @@
-import htmlgen
-import markdown, strutils, os, times
+import htmlgen, markdown, strutils, os, times, uri
 include db
 
 proc updatePosts(): void =
@@ -129,7 +128,7 @@ proc blog(post: int): string =
   let
     p: Post = findPost(post)
     tags = getPostTags(post)
-            .map(proc (tag: string): string = a(href="/tag/" & tag, tag))
+            .map(proc (tag: string): string = a(href="/tag/" & encodeUrl(tag), tag))
     tags_csv = if len(tags) > 0: tags.join(", ") else: "none"
   if p.title != "":
     result =

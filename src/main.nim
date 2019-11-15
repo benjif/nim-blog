@@ -1,4 +1,4 @@
-import jester, re, strutils
+import jester, re, strutils, uri
 include inner
 
 updatePosts()
@@ -13,10 +13,12 @@ routes:
     if @"tag" == "":
       resp error("Page not found")
     else:
-      let isalphanum =
-        all(mapIt(@"tag", it), proc(c: char): bool = isAlphaNumeric(c) or c == ' ')
+      let
+        decoded = decodeUrl(@"tag")
+        isalphanum =
+          all(mapIt(decoded, it), proc(c: char): bool = isAlphaNumeric(c) or c == ' ')
       if isalphanum:
-        resp tag(@"tag")
+        resp tag(decoded)
       else:
         resp(error("Invalid tag"))
   get "/list":
