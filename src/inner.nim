@@ -1,9 +1,6 @@
-import htmlgen except `html`
+import htmlgen
 import markdown, strutils, os, times
 include db
-
-macro html(e: varargs[untyped]): untyped =
-  result = xmlCheckedTag(e, "html", "lang xmlns")
 
 proc updatePosts(): void =
   for f in walkFiles("posts/*.md"):
@@ -72,9 +69,9 @@ proc index(): string =
     for p in recentList:
       recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   "<!DOCTYPE html>" &
-  html(lang="en",
+  html(
     header(),
-    body(
+    body(lang="en",
       `div`(id="content",
         top(),
         `div`(id="right",
@@ -95,9 +92,9 @@ proc index(): string =
 
 proc error(msg: string): string =
   "<!DOCTYPE html>" &
-  html(lang="en",
+  html(
     header(),
-    body(
+    body(lang="en",
       `div`(id="content",
         top(),
         `div`(id="right", h1(msg))
@@ -115,9 +112,9 @@ proc list(): string =
     for p in recentList:
       recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   "<!DOCTYPE html>" &
-  html(lang="en",
+  html(
     header(),
-    body(
+    body(lang="en",
       `div`(id="content",
         top(),
         `div`(id="right",
@@ -137,14 +134,14 @@ proc blog(post: int): string =
   if p.title != "":
     result =
       "<!DOCTYPE html>" &
-      html(lang="en",
+      html(
         header(),
-        body(
+        body(lang="en",
           `div`(id="content",
             top(),
             `div`(id="right",
               `div`(id="post",
-                h1(id="post-title", p.title),
+                `div`(id="post-title", p.title),
                 `div`(id="post-info",
                   `div`(class="tags", "tag(s): ", i(tags_csv)),
                   span(class="date", "created: ", i(p.date))
@@ -170,9 +167,9 @@ proc tag(name: string): string =
         p = findPost(pid)
       taggedString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   "<!DOCTYPE html>" &
-  html(lang="en",
+  html(
     header(),
-    body(
+    body(lang="en",
       `div`(id="content",
         top(),
         `div`(id="right",
@@ -185,9 +182,9 @@ proc tag(name: string): string =
 
 proc links(): string =
   "<!DOCTYPE html>" &
-  html(lang="en",
+  html(
     header(),
-    body(
+    body(lang="en",
       `div`(id="content",
         top(),
         `div`(id="right",

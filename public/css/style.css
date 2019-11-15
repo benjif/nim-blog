@@ -75,10 +75,11 @@
   background: white;
 }
 #content {
-  margin-top: 16px;
   max-width: 52rem;
   display: block;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 16px;
   padding-left: 10px;
   padding-right: 10px;
 }
@@ -90,10 +91,6 @@
 #nav li {
   text-align: center;
   font-variant: small-caps;
-}
-.post-title {
-  font-size: 20px;
-  margin-bottom: 0;
 }
 .timestamp {
   color: #666;
@@ -107,6 +104,13 @@ ul li .timestamp {
 ul li .timestamp:before {
   content: "\00BB"; 
   padding-right: 5px;
+}
+#post-title {
+  color: #3c3c3c;
+  font-variant: small-caps;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 0;
 }
 #post-info {
   color: #666;
