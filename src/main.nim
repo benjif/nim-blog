@@ -13,7 +13,12 @@ routes:
     if @"tag" == "":
       resp error("Page not found")
     else:
-      resp tag(@"tag")
+      let isalphanum =
+        all(mapIt(@"tag", it), proc(c: char): bool = isAlphaNumeric(c))
+      if isalphanum:
+        resp tag(@"tag")
+      else:
+        resp(error("Invalid tag"))
   get "/list":
     resp list()
   get "/links":
