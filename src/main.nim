@@ -14,7 +14,7 @@ routes:
       resp error("Page not found")
     else:
       let isalphanum =
-        all(mapIt(@"tag", it), proc(c: char): bool = isAlphaNumeric(c))
+        all(mapIt(@"tag", it), proc(c: char): bool = isAlphaNumeric(c) or c == ' ')
       if isalphanum:
         resp tag(@"tag")
       else:
