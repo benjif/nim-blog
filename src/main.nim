@@ -9,6 +9,11 @@ routes:
   get re"^\/blog\/(\d)$":
     if len(request.matches) > 0:
       resp blog(parseInt(request.matches[0]))
+  get "/tag/@tag":
+    if @"tag" == "":
+      resp error("Page not found")
+    else:
+      resp tag(@"tag")
   get "/list":
     resp list()
   get "/links":
@@ -18,4 +23,4 @@ routes:
   error Exception:
     resp Http500, error("Something went wrong")
 
-db.close()
+closeDb()

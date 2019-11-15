@@ -1,5 +1,9 @@
-import htmlgen, markdown, strutils, os, times
+import htmlgen except `html`
+import markdown, strutils, os, times
 include db
+
+macro html(e: varargs[untyped]): untyped =
+  result = xmlCheckedTag(e, "html", "lang xmlns")
 
 proc updatePosts(): void =
   for f in walkFiles("posts/*.md"):
@@ -13,6 +17,11 @@ proc updatePosts(): void =
       echo "PRE Attempting adding new post #", id
       echo "New post title: "
       let title = readLine(stdin)
+      echo "New post tags (comma separated): "
+      let
+        tags = readLine(stdin)
+                .split(',')
+                .map(proc(tag: string): string = tag.strip())
       let res = addPost(
         Post(
           id: id,
@@ -21,6 +30,8 @@ proc updatePosts(): void =
           date: getDateStr()
         )
       )
+      for tag in tags:
+        addPostTag(id, tag)
       if res == -1:
         echo "Failed to add new post #", id
         quit()
@@ -28,12 +39,13 @@ proc updatePosts(): void =
       echo "PRE Updating post #", id
       updatePost(id, html)
 
-proc header(dark: bool = false): string =
+proc header(): string =
   head(
     title("Benjamin Frady"),
-    meta(name="viewport", content="width=device-width,height=device-height,initial-scale=1.0"),
     link(rel="icon", href="/favicon.png"),
-    link(rel="stylesheet", type="text/css", href="/css/style.css")
+    link(rel="stylesheet", type="text/css", href="/css/style.css"),
+    meta(name="viewport", content="width=device-width,height=device-height,initial-scale=1.0"),
+    meta(name="author", content="Benjamin Frady")
   )
 
 proc top(): string =
@@ -59,7 +71,8 @@ proc index(): string =
   else:
     for p in recentList:
       recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
-  html(
+  "<!DOCTYPE html>" &
+  html(lang="en",
     header(),
     body(
       `div`(id="content",
@@ -81,7 +94,8 @@ proc index(): string =
   )
 
 proc error(msg: string): string =
-  html(
+  "<!DOCTYPE html>" &
+  html(lang="en",
     header(),
     body(
       `div`(id="content",
@@ -100,7 +114,8 @@ proc list(): string =
   else:
     for p in recentList:
       recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
-  html(
+  "<!DOCTYPE html>" &
+  html(lang="en",
     header(),
     body(
       `div`(id="content",
@@ -116,17 +131,24 @@ proc list(): string =
 proc blog(post: int): string =
   let
     p: Post = findPost(post)
+    tags = getPostTags(post)
+            .map(proc (tag: string): string = a(href="/tag/" & tag, tag))
+    tags_csv = if len(tags) > 0: tags.join(", ") else: "none"
   if p.title != "":
     result =
-      html(
+      "<!DOCTYPE html>" &
+      html(lang="en",
         header(),
         body(
           `div`(id="content",
             top(),
             `div`(id="right",
               `div`(id="post",
-                h1(class="post-title", p.title),
-                span(class="date", p.date),
+                h1(id="post-title", p.title),
+                `div`(id="post-info",
+                  `div`(class="tags", "tag(s): ", i(tags_csv)),
+                  span(class="date", "created: ", i(p.date))
+                ),
                 p.post
               )
             )
@@ -135,8 +157,35 @@ proc blog(post: int): string =
       )
   else: result = error("Page not found")
 
+proc tag(name: string): string =
+  var
+    taggedString: string
+  let
+    taggedPosts: seq[int] = getPostsWithTag(name)
+  if len(taggedPosts) == 0:
+    taggedString = li("No posts found with tag")
+  else:
+    for pid in taggedPosts:
+      let
+        p = findPost(pid)
+      taggedString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
+  "<!DOCTYPE html>" &
+  html(lang="en",
+    header(),
+    body(
+      `div`(id="content",
+        top(),
+        `div`(id="right",
+          h1("Posts"),
+          ul(taggedString)
+        )
+      )
+    )
+  )
+
 proc links(): string =
-  html(
+  "<!DOCTYPE html>" &
+  html(lang="en",
     header(),
     body(
       `div`(id="content",
