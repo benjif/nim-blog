@@ -1,40 +1,6 @@
 import htmlgen, markdown, strutils, os, times, uri
 include db
 
-proc updatePosts(): void =
-  for f in walkFiles("posts/*.md"):
-    let
-      md = readFile(f)
-      html = markdown(md)
-      new_chksm = getMD5(html)
-      id = parseInt(f[6..^4])
-      old = findPost(id)
-    if old.id == -1:
-      echo "PRE Attempting adding new post #", id
-      echo "New post title: "
-      let title = readLine(stdin)
-      echo "New post tags (comma separated): "
-      let
-        tags = readLine(stdin)
-                .split(',')
-                .map(proc(tag: string): string = tag.strip())
-      let res = addPost(
-        Post(
-          id: id,
-          title: title,
-          post: html,
-          date: getDateStr()
-        )
-      )
-      for tag in tags:
-        addPostTag(id, tag)
-      if res == -1:
-        echo "Failed to add new post #", id
-        quit()
-    elif old.chksm != new_chksm:
-      echo "PRE Updating post #", id
-      updatePost(id, html)
-
 proc header(): string =
   head(
     title("Benjamin Frady"),
@@ -117,6 +83,7 @@ proc list(): string =
       `div`(id="content",
         top(),
         `div`(id="right",
+          i("You can browse by tags ", a(href="/tag", "here", ".")),
           h1("All Posts"),
           ul(recentString)
         )
@@ -172,8 +139,29 @@ proc tag(name: string): string =
       `div`(id="content",
         top(),
         `div`(id="right",
-          h1("Posts"),
+          h1("Tag: " & capitalizeAscii(name)),
           ul(taggedString)
+        )
+      )
+    )
+  )
+
+proc tagList(): string =
+  let
+    tags = getAllTags()
+  var
+    tagsString: string
+  for tag in tags:
+    tagsString &= li(a(href = "/tag/" & tag, capitalizeAscii(tag)))
+  "<!DOCTYPE html>" &
+  html(
+    header(),
+    body(lang="en",
+      `div`(id="content",
+        top(),
+        `div`(id="right",
+          h1("Tags"),
+          ul(tagsString)
         )
       )
     )

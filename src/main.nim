@@ -9,6 +9,8 @@ routes:
   get re"^\/blog\/(\d)$":
     if len(request.matches) > 0:
       resp blog(parseInt(request.matches[0]))
+  get "/tag":
+    resp tagList()
   get "/tag/@tag":
     if @"tag" == "":
       resp error("Page not found")

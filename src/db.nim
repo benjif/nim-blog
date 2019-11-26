@@ -1,4 +1,4 @@
-import db_sqlite, strutils, sequtils, times, md5
+import db_sqlite, strutils, sequtils, times, md5, markdown, os
 
 type
   Post = object
@@ -104,6 +104,13 @@ proc recentPosts(): seq[Post] =
       )
     )
 
+proc getAllTags(): seq[string] =
+  let
+    res = db.getAllRows(sql"SELECT name FROM tags ORDER BY name")
+  for row in res:
+    result.add(row[0])
+
+
 proc addTag(name: string): void =
   db.exec(
     sql"INSERT OR IGNORE INTO tags (name) VALUES (?)",
@@ -145,3 +152,37 @@ proc getPostsWithTag(name: string): seq[int] =
   )
   for row in res:
     result.add(parseInt(row[0]))
+
+proc updatePosts(): void =
+  for f in walkFiles("posts/*.md"):
+    let
+      md = readFile(f)
+      html = markdown(md)
+      new_chksm = getMD5(html)
+      id = parseInt(f[6..^4])
+      old = findPost(id)
+    if old.id == -1:
+      echo "PRE Attempting adding new post #", id
+      echo "New post title: "
+      let title = readLine(stdin)
+      echo "New post tags (comma separated): "
+      let
+        tags = readLine(stdin)
+                .split(',')
+                .map(proc(tag: string): string = tag.strip())
+      let res = addPost(
+        Post(
+          id: id,
+          title: title,
+          post: html,
+          date: getDateStr()
+        )
+      )
+      for tag in tags:
+        addPostTag(id, tag)
+      if res == -1:
+        echo "Failed to add new post #", id
+        quit()
+    elif old.chksm != new_chksm:
+      echo "PRE Updating post #", id
+      updatePost(id, html)

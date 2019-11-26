@@ -3,6 +3,7 @@
 *.swo
 blog.db
 run
+refresh
 nimcache
 tools
 public/images/*
