@@ -6,7 +6,7 @@ updatePosts()
 routes:
   get "/":
     resp index()
-  get re"^\/blog\/(\d)$":
+  get re"^\/blog\/([1-9]\d*)$":
     if len(request.matches) > 0:
       resp blog(parseInt(request.matches[0]))
   get "/tag":
@@ -25,6 +25,8 @@ routes:
         resp(error("Invalid tag"))
   get "/list":
     resp list()
+  get "/rss":
+    resp rss(), "application/rss+xml"
   get "/links":
     resp links()
   error Http404:
