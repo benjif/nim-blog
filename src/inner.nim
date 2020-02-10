@@ -11,7 +11,7 @@ proc header(): string =
   )
 
 proc top(): string =
-  `div`(id="left",
+  `div`(id="right",
     a(href="/",
       img(src="/images/frady.png", alt="", height="84")
     ),
@@ -39,17 +39,21 @@ proc index(): string =
     body(lang="en",
       `div`(id="content",
         top(),
-        `div`(id="right",
-          h1("About Me"),
-          p("Hi, I'm Benjamin Frady. I enjoy woodworking, fiddling with music, and designing software."),
+        `div`(id="left",
+          h1("About"),
+          p(
+            "This is the website of Benjamin Frady. My interests include designing software, woodworking, and fiddling with music."
+          ),
           h1("Contact"),
           p(
-            "If you'd like to get in contact with me, you can ",
-            a(href="mailto:benjamin@frady.org", "shoot me an email"), ". My public projects can be found on ",
-            a(href="https://github.com/benjif", img(src="/icons/github.svg", style="padding-right: 3px;", alt="", width="16px", class="icon"), "GitHub"), "."
+            "You can ",
+            a(href="mailto:benjamin@frady.org", "shoot me an email"),
+            " or add me on Jabber (",
+            a(href="xmpp:benjamin@frady.org", "benjamin@frady.org"),
+            ")."
           ),
           h1("Recent Posts"),
-          ul(recentString),
+          ul(recentString)
         )
       )
     )
@@ -62,34 +66,57 @@ proc error(msg: string): string =
     body(lang="en",
       `div`(id="content",
         top(),
-        `div`(id="right", h1(msg))
+        `div`(id="left", h1(msg))
       )
     )
   )
 
 proc list(): string =
   var
-    recentList: seq[Post] = recentPosts()
-    recentString: string
-  if len(recentList) == 0:
-    recentString = li("Nothing here yet!")
+    allPosts: seq[Post] = getPosts()
+    postsString: string
+  if len(allPosts) == 0:
+    postsString = li("Nothing here yet!")
   else:
-    for p in recentList:
-      recentString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
+    for p in allPosts:
+      postsString &= li(span(class="timestamp", p.date) & " " & a(href = "/blog/" & $(p.id), p.title))
   "<!DOCTYPE html>" &
   html(
     header(),
     body(lang="en",
       `div`(id="content",
         top(),
-        `div`(id="right",
+        `div`(id="left",
           i("You can browse by tags ", a(href="/tag", "here", ".")),
           h1("All Posts"),
-          ul(recentString)
+          ul(postsString)
         )
       )
     )
   )
+
+proc rss(): string =
+  var
+    recentList: seq[Post] = recentPosts()
+  result &= """
+<?xml version="1.0" ?>
+<rss version="2.0">
+<channel>
+<title>Frady.org posts</title>
+<link>https://frady.org/</link>
+<description>Benjamin Frady's blog posts</description>
+"""
+  if len(recentList) != 0:
+    for p in recentList:
+      result &= """
+<item>
+<title>""" & p.title & """</title>
+<link>https://frady.org/blog/""" & $(p.id) & """</link>
+</item>
+"""
+  result &= """
+</channel>
+</rss>"""
 
 proc blog(post: int): string =
   let
@@ -105,7 +132,7 @@ proc blog(post: int): string =
         body(lang="en",
           `div`(id="content",
             top(),
-            `div`(id="right",
+            `div`(id="left",
               `div`(id="post",
                 `div`(id="post-title", p.title),
                 `div`(id="post-info",
@@ -126,7 +153,7 @@ proc tag(name: string): string =
   let
     taggedPosts: seq[int] = getPostsWithTag(name)
   if len(taggedPosts) == 0:
-    taggedString = li("No posts found with tag")
+    taggedString = li("Tag not found")
   else:
     for pid in taggedPosts:
       let
@@ -138,7 +165,7 @@ proc tag(name: string): string =
     body(lang="en",
       `div`(id="content",
         top(),
-        `div`(id="right",
+        `div`(id="left",
           h1("Tag: " & capitalizeAscii(name)),
           ul(taggedString)
         )
@@ -159,7 +186,7 @@ proc tagList(): string =
     body(lang="en",
       `div`(id="content",
         top(),
-        `div`(id="right",
+        `div`(id="left",
           h1("Tags"),
           ul(tagsString)
         )
@@ -174,7 +201,7 @@ proc links(): string =
     body(lang="en",
       `div`(id="content",
         top(),
-        `div`(id="right",
+        `div`(id="left",
           h1("Personal Links"),
           ul(
             li(
