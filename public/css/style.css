@@ -1,31 +1,79 @@
 @media (max-width: 960px) {
-  #left {
+  #nav {
+    display: inline-block;
+    vertical-align: middle;
+  }
+  #nav ul {
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+  }
+  #nav li {
+    display: inline;
+    margin-left: 16px;
+  }
+  #right {
+    width: 100%;
     display: block;
-    margin: 0 auto;
+    margin-top: 8px;
+    margin-bottom: 8px;
+  }
+  #right hr {
+    display: none;
+  }
+  #right img {
+    margin-left: 2px;
+    vertical-align: middle;
   }
   #post-title {
     text-align: center;
   }
+  #content {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
 }
 @media (min-width: 961px) {
   #left {
-    position: absolute;
+    margin-right: 96px;
   }
   #right {
-    margin-left: 96px;
+    float: right;
+  }
+  #right img {
+    padding: 0;
+    margin: 0;
+  }
+  #right hr {
+    display: block;
   }
   .icon {
     padding-top: 2px;
   }
+  #content {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+#nav ul {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+#nav li {
+  text-align: center;
+  font-variant: small-caps;
+  text-transform: lowercase;
 }
 #post img {
   max-width: 100%;
 }
 #post .figure {
+  max-height: 400px;
   max-width: 80%;
   display: block;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
   margin-left: auto;
   margin-right: auto;
 }
@@ -34,25 +82,15 @@
   text-align: center;
   margin-top: .5rem;
 }
-#left {
-  font-family: 'Source Serif Pro';
-  width: 82px;
-}
-#left img {
-  padding: 0;
-  margin: 0;
-}
-#left a {
+#right a {
   display: inline-block;
 }
 #right hr {
-  margin-top: 3em;
-  margin-bottom: 1em;
+  margin-bottom: 0.4em;
   border: none;
   border-top: 1px solid #ccc;
 }
-#left hr {
-  display: block;
+#right hr {
   margin-top: 12px auto;
   height: 0px;
   width: 82px;
@@ -63,7 +101,7 @@
   color: #333;
   text-align: center;
 }
-#left hr:after {
+#right hr:after {
   content: "~";
   display: inline-block;
   position: relative;
@@ -73,22 +111,12 @@
   background: white;
 }
 #content {
-  max-width: 52rem;
+  font-size: 16px;
+  max-width: 100ch;
   display: block;
   margin-left: auto;
   margin-right: auto;
   margin-top: 16px;
-  padding-left: 10px;
-  padding-right: 10px;
-}
-#nav ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-}
-#nav li {
-  text-align: center;
-  font-variant: small-caps;
 }
 .timestamp {
   color: #666;
@@ -96,6 +124,7 @@
 }
 ul li .timestamp {
   font-variant: small-caps;
+  text-transform: lowercase;
   float: left;
   width: 7em;
 }
@@ -106,6 +135,7 @@ ul li .timestamp:before {
 #post-title {
   color: #3c3c3c;
   font-variant: small-caps;
+  text-transform: lowercase;
   font-weight: bold;
   font-size: 20px;
   margin-bottom: 0;
@@ -128,6 +158,7 @@ ul li .timestamp:before {
 h1 {
   color: #3c3c3c;
   font-variant: small-caps;
+  text-transform: lowercase;
   font-weight: bold;
   font-size: 16px;
   margin-top: 16px;
@@ -144,13 +175,20 @@ body {
 ol { margin-top: 0; font-variant-numeric: oldstyle-nums; font-size: 14px; }
 ol span { margin-left: 8px; font-size: 16px; }
 ul { list-style-type: none; padding-left: 20px; margin-top: 0; }
-#post ul { margin-top: 8px; margin-bottom: 8px; margin-left: 10px; list-style-type: ' - '; }
+#post ul {
+  margin-top: 8px;
+  margin-bottom: 8px;
+  margin-left: 10px;
+  list-style-type: ' \2013 ';
+  list-style-position: outside;
+}
 li { line-height: 1.7; }
 ul li:before { position: absolute; margin-left: -1em; }
+#post ul li { padding-left: .5em; }
 a { text-decoration: none; color: #527f83; }
 a:hover { color: #425d60; }
-p { margin: 0; width: 100%; line-height: 1.7; font-size: 16px; }
-#right p {
+p { margin: 0; width: 100%; line-height: 1.7; }
+#left p {
   text-align: justify;
   word-wrap: break-word;
   overflow-wrap: break-word;
@@ -190,6 +228,20 @@ code {
   padding-left: 2px;
   padding-right: 2px;
   /*padding: 1em 1.25em;*/
+}
+.imagesbs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  align-items: center;
+}
+.imagesbs > img {
+  height: 50%;
+  margin-left: 8px;
+  margin-right: 8px;
+  width: auto;
+  display: inline-block;
 }
 @font-face{
   font-family: 'Source Serif Pro';
