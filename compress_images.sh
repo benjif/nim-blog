@@ -1,5 +1,5 @@
 #!/bin/sh
 
-for i in public/images/*.png; do
+for i in $(find -name \*.png); do
   optipng -o2 -strip all $i
 done
