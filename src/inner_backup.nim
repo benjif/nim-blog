@@ -1,13 +1,7 @@
-import
-  htmlgen,
-  markdown,
-  strutils,
-  os,
-  times,
-  uri
+import htmlgen, markdown, strutils, os, times, uri
 include db
 
-proc header(): string {.compileTime.} =
+proc header(): string =
   head(
     title("Benjamin Frady"),
     link(rel="icon", href="/favicon.png"),
@@ -16,7 +10,7 @@ proc header(): string {.compileTime.} =
     meta(name="author", content="Benjamin Frady")
   )
 
-proc top(): string {.compileTime.} =
+proc top(): string =
   `div`(id="right",
     a(href="/",
       img(src="/images/frady.png", alt="", height="84")
@@ -65,7 +59,7 @@ proc index(): string =
     )
   )
 
-proc error(msg: string): string {.compileTime.} =
+proc error(msg: string): string =
   "<!DOCTYPE html>" &
   html(
     header(),
@@ -117,11 +111,11 @@ proc rss(): string =
     for p in recentList:
       result &= """
 <item>
-<title>$1</title>
-<link>https://frady.org/blog/$2</link>
-<pubDate>$3</pubDate>
+<title>""" & p.title & """</title>
+<link>https://frady.org/blog/""" & $(p.id) & """</link>
+<pubDate>""" & $(format(parse(p.date, "dd MMM yyyy"), "D, d M Y H:i:s T")) & """</pubDate>
 </item>
-""" % [p.title, $(p.id), $(format(parse(p.date, "dd MMM yyyy"), "ddd, d M yyyy H:m:s z"))]
+"""
   result &= """
 </channel>
 </rss>"""
@@ -202,7 +196,7 @@ proc tagList(): string =
     )
   )
 
-proc links(): string {.compileTime.} =
+proc links(): string =
   "<!DOCTYPE html>" &
   html(
     header(),
@@ -212,6 +206,12 @@ proc links(): string {.compileTime.} =
         `div`(id="left",
           h1("Personal Links"),
           ul(
+            li(
+              a(href="https://github.com/benjif",
+                img(src="/icons/github.svg", alt="", width="16px", class="icon"),
+                "GitHub"
+              )
+            ),
             li(
               a(href="https://last.fm/user/benji_is_me",
                 img(src="/icons/last-dot-fm.svg", alt="", width="16px", class="icon"),

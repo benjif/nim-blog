@@ -2,11 +2,11 @@ import db_sqlite, strutils, sequtils, times, md5, markdown, os
 
 type
   Post = object
-    id:     int
-    title:  string
-    post:   string
-    date:   string
-    chksm:  string
+    id:         int
+    title:      string
+    post:       string
+    date:       string
+    chksm:      string
 
 let
   db = open("blog.db", "", "", "")
@@ -52,11 +52,11 @@ proc findPost(id: int): Post =
   if len(res) > 0:
     result =
       Post(
-        id:     parseInt(res[0][0]),
-        title:  res[0][1],
-        post:   res[0][2],
-        date:   format(parse(res[0][3], "yyyy-MM-dd"), "dd MMM yyyy"),
-        chksm: res[0][4]
+        id:         parseInt(res[0][0]),
+        title:      res[0][1],
+        post:       res[0][2],
+        date:       format(parse(res[0][3], "yyyy-MM-dd"), "dd MMM yyyy"),
+        chksm:      res[0][4]
       )
   else:
     result = Post(id: -1)
@@ -65,11 +65,11 @@ proc getPosts(): seq[Post] =
   for post in db.fastRows(sql"SELECT * FROM posts ORDER BY id DESC"):
     result.add(
       Post(
-        id:     parseInt(post[0]),
-        title:  post[1],
-        post:   post[2],
-        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy"),
-        chksm:  post[4]
+        id:         parseInt(post[0]),
+        title:      post[1],
+        post:       post[2],
+        date:       format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy"),
+        chksm:      post[4]
       )
     )
 
@@ -96,11 +96,11 @@ proc recentPosts(): seq[Post] =
   for post in res:
     result.add(
       Post(
-        id:     parseInt(post[0]),
-        title:  post[1],
-        post:   post[2],
-        date:   format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy"),
-        chksm:  post[4]
+        id:         parseInt(post[0]),
+        title:      post[1],
+        post:       post[2],
+        date:       format(parse(post[3], "yyyy-MM-dd"), "dd MMM yyyy"),
+        chksm:      post[4]
       )
     )
 
