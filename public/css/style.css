@@ -236,10 +236,13 @@ code {
   margin-bottom: 2rem;
   align-items: center;
 }
+.imagewrapper {
+  flex: 1;
+  margin-left: 6px;
+  margin-right: 6px;
+}
 .imagesbs > img {
   height: 50%;
-  margin-left: 8px;
-  margin-right: 8px;
   width: auto;
   display: inline-block;
 }
