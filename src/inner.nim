@@ -111,8 +111,8 @@ proc rss(): string =
 <title>Frady.org posts</title>
 <link>https://frady.org/</link>
 <description>Benjamin Frady's blog posts</description>
-# Redo this later so we don't have to reparse date
 """
+# Redo this later so we don't have to reparse date
   if len(recentList) != 0:
     for p in recentList:
       result &= """
@@ -228,6 +228,18 @@ proc links(): string {.compileTime.} =
               a(href="https://news.ycombinator.com/user?id=benji_is_me",
                 img(src="/icons/ycombinator.svg", alt="", width="16px", class="icon"),
                 "HackerNews"
+              )
+            ),
+            li(
+              a(href="https://github.com/benjif",
+                img(src="/icons/github.svg", alt="", width="16px", class="icon"),
+                "GitHub"
+              )
+            ),
+            li(
+              a(href="https://git.frady.org/",
+                img(src="/icons/git.svg", alt="", width="16px", class="icon"),
+                "Self-hosted Git"
               )
             )
           )
