@@ -1,7 +1,8 @@
 import jester, re, strutils, uri
 include inner
 
-updatePosts()
+if updatePosts():
+  updateRss()
 
 routes:
   get "/":
@@ -31,7 +32,7 @@ routes:
     resp list()
 
   get "/rss":
-    resp rss(), "application/rss+xml"
+    redirect("/rss.xml")
 
   get "/links":
     resp links()

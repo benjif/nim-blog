@@ -7,4 +7,5 @@ refresh
 nimcache
 tools
 public/images/*
+public/rss.xml
 !public/images/frady.png

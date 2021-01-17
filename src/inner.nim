@@ -50,16 +50,14 @@ proc index(): string =
           p(
             "This is the website of Benjamin Frady. My interests include designing software, woodworking, and fiddling with music."
           ),
+          h1("Recent Posts"),
+          ul(recentString),
           h1("Contact"),
           p(
-            "You can ",
+            "Feel free to ",
             a(href="mailto:benjamin@frady.org", "shoot me an email"),
-            " or add me on Jabber (",
-            a(href="xmpp:benjamin@frady.org", "benjamin@frady.org"),
-            ")."
-          ),
-          h1("Recent Posts"),
-          ul(recentString)
+            "."
+          )
         )
       )
     )
@@ -100,31 +98,6 @@ proc list(): string =
       )
     )
   )
-
-proc rss(): string =
-  var
-    recentList: seq[Post] = recentPosts()
-  result &= """
-<?xml version="1.0" ?>
-<rss version="2.0">
-<channel>
-<title>Frady.org posts</title>
-<link>https://frady.org/</link>
-<description>Benjamin Frady's blog posts</description>
-"""
-# Redo this later so we don't have to reparse date
-  if len(recentList) != 0:
-    for p in recentList:
-      result &= """
-<item>
-<title>$1</title>
-<link>https://frady.org/blog/$2</link>
-<pubDate>$3</pubDate>
-</item>
-""" % [p.title, $(p.id), $(format(parse(p.date, "dd MMM yyyy"), "ddd, d M yyyy H:m:s z"))]
-  result &= """
-</channel>
-</rss>"""
 
 proc blog(post: int): string =
   let

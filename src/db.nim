@@ -153,7 +153,9 @@ proc getPostsWithTag(name: string): seq[int] =
   for row in res:
     result.add(parseInt(row[0]))
 
-proc updatePosts(): void =
+# (returns true if a post was added/updated)
+proc updatePosts(): bool =
+  result = false
   for f in walkFiles("posts/*.md"):
     let
       md = readFile(f)
@@ -170,19 +172,47 @@ proc updatePosts(): void =
         tags = readLine(stdin)
                 .split(',')
                 .map(proc(tag: string): string = tag.strip())
-      let res = addPost(
-        Post(
-          id: id,
-          title: title,
-          post: html,
-          date: getDateStr()
+        res = addPost(
+          Post(
+            id: id,
+            title: title,
+            post: html,
+            date: getDateStr()
+          )
         )
-      )
       for tag in tags:
         addPostTag(id, tag)
       if res == -1:
         echo "Failed to add new post #", id
         quit()
+      result = true
     elif old.chksm != new_chksm:
       echo "PRE Updating post #", id
       updatePost(id, html)
+      result = true
+
+proc updateRss(): void =
+  var
+    postList: seq[Post] = getPosts()
+  let
+    rssFile = open("public/rss.xml", fmWrite)
+  rssFile.write("""
+<?xml version="1.0" ?>
+<rss version="2.0">
+<channel>
+<title>Frady.org posts</title>
+<link>https://frady.org/</link>
+<description>Benjamin Frady's blog posts</description>
+""")
+  for p in postList:
+    rssFile.write("""
+<item>
+<title>$1</title>
+<link>https://frady.org/blog/$2</link>
+<pubDate>$3</pubDate>
+</item>
+""" % [p.title, $(p.id), $(format(parse(p.date, "dd MMM yyyy"), "ddd, d MMM yyyy H:m:s z"))])
+  rssFile.write("""
+</channel>
+</rss>""")
+  rssFile.close()
